@@ -128,4 +128,14 @@ export const ERC20Tokens:TokenProp = {
     logoURI:
       "https://tokens.1inch.io/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.png",
   },
+  "Tether Gold":{
+  "decimals": 6,
+  "address": "0x68749665ff8d2d112fa859aa293f07a622782f38",
+  "logoURI": "https://tokens.1inch.io/0x68749665ff8d2d112fa859aa293f07a622782f38.png"
+},
+  "Quant":{
+  "decimals": 18,
+  "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+  "logoURI": "https://tokens.1inch.io/0x4a220e6096b25eadb88358cb44068a3248254675.png"
+}
 };

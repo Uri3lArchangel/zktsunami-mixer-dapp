@@ -1,4 +1,4 @@
-import { ERC20Tokens } from "@/FE/core/testnet/ERC20Tokes";
+import { ERC20Tokens } from "@/FE/core/ERC20Tokes";
 import { droptokens, generateRandomString } from "@/FE/functions/interact";
 import Image from "next/image";
 import React, { useRef, useState } from "react";

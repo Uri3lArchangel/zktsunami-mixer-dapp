@@ -5,7 +5,7 @@ import { btnclick, btnunClick, droptokens } from "@/FE/functions/interact";
 import DropdownTokens from "../sections/Dropdown";
 import Image from "next/image";
 import { ethers } from "ethers";
-import { ERC20Tokens } from "@/FE/core/testnet/ERC20Tokes";
+import { ERC20Tokens } from "@/FE/core/ERC20Tokes";
 import { splitNumber } from "@/BE/functions/shift";
 import { web3Deposit } from "@/BE/functions/Deposit";
 import { Button, message } from "antd";

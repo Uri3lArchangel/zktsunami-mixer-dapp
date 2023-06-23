@@ -1,6 +1,6 @@
 import React from 'react'
 import utils from "../../../styles/utils.module.css";
-import ERC20Tokns from '../../../FE/core/testnet/ERC20TokensData.json'
+import ERC20Tokns from '../../../FE/core/ERC20TokensData.json'
 import Image from 'next/image';
 interface Props{
     select: React.Dispatch<React.SetStateAction<string>>

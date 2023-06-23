@@ -1,0 +1,365 @@
+.tabContainer {
+  width: 100%;
+  display: block;
+  margin-top: 4em;
+  font-weight: 700;
+}
+.depositTitle h1 {
+  font-size: 1.4rem;
+}
+.depositTitle em {
+  font-size: 1.1rem;
+}
+.tabButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.5em 0;
+}
+.tabButtonsContainer button {
+  background-image: url(../../public/img33acdae0f/tab.png);
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 0.5em 0.8em;
+}
+.depositContainer {
+  background-image: url(../../public/img33acdae0f/depositTab.png);
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 1.2em 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.tokenInput {
+  display: flex;
+  justify-content: center;
+  padding: 0.2em 0;
+  width: 80%;
+  margin: 1em auto;
+  position: relative;
+}
+.tokenInput input {
+  background-image: url(../../public/img33acdae0f/indent.png);
+  background-size: 100% 100%;
+  background-position: center;
+  outline: 0;
+  width: 100%;
+  height: 50px;
+  padding: 0 0.5em;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.icons {
+  background-image: url(../../public/img33acdae0f/tab.png);
+  background-size: 100% 100%;
+  background-position: center;
+  width: 13%;
+  height: 50px;
+  cursor: pointer;
+}
+
+.amountInput {
+display: flex;
+justify-content: center;
+width: 80%;
+margin: auto;
+flex-wrap: wrap;
+align-items: center;
+
+}
+.amountInput button{
+  background-image: url(../../public/img33acdae0f/tab.png);
+  background-position: center;
+  background-size: 100% 100%;
+  margin: 0.4em 0.5em ;
+  padding: 0.3em 0.5em;
+  font-size: 1rem;
+}
+.depositInnerContainer input::placeholder {
+  color: #4f4f4f;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.depositInnerContainer {
+  background-image: url(../../public/img33acdae0f/borderLine.png);
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 1.5em 0 0.5em 0;
+  width: 90%;
+  margin: 1em auto;
+}
+.depositButton {
+  display: block;
+  margin: 2em auto;
+  width: 40%;
+  height: 40px;
+  background-image: url(../../public/img33acdae0f/tab.png);
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.dropDown {
+  position: absolute;
+  top: 100%;
+  z-index: 5;
+  background-color: #837f7f;
+  border: 1px solid #000;
+  background-size: 100% 100%;
+  background-position: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 0.2em 0;
+  width: 100%;
+  overflow-y: scroll;
+  height: 0px;
+  transition: all 0.35s linear;
+  visibility: hidden;
+}
+.dropDown li {
+  background-image: url(../../public/img33acdae0f/indentInputWhite.png);
+  background-position: center;
+  width: 95%;
+  height: 40px;
+  margin: 0.5em auto;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropDown li:hover {
+  text-decoration: underline;
+}
+.dropDown img {
+  width: 20px;
+  height: 20px;
+  margin: 0 0.4em 0 0;
+}
+
+.icons img {
+  width: 35px;
+  height: 35px;
+}
+.icons[id="up"] {
+  grid-area: btnup;
+  height: 30px;
+  width: 100%;
+}
+.icons[id="down"] {
+  grid-area: btndwn;
+  height: 30px;
+  width: 100%;
+}
+.withdrawTabContainer {
+  background-image: url(../../public/img33acdae0f/tab\ form.png);
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 1.2em 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.withdrawTopInnerContainer {
+  background-image: url(../../public/img33acdae0f/borderLine.png);
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 1.5em 0 2em 0;
+  width:88%;
+  margin: auto;
+  margin-top: 2em;
+
+}
+.withdrawTopInnerContainer > div {
+  display: block;
+  /* grid-template-areas:
+    "input1 input2"
+    "input3 txt"; */
+  width: 95%;
+  margin: auto;
+  gap: 0.15em;
+  /* grid-template-columns: 2fr 2fr; */
+}
+.withdrawAmountInput {
+  display: grid;
+  grid-template-areas:
+    "input input input input btnup"
+    "input input input input btndwn";
+
+  width: 100%;
+  margin: 0.5em auto;
+}
+.withdrawAmountInput input {
+  background-image: url(../../public/img33acdae0f/indentInputWhite.png);
+  background-size: 100% 100%;
+  background-position: center;
+  outline: 0;
+  padding: 0 0.5em;
+  font-weight: 700;
+  height: 60px;
+  width: 100%;
+  grid-area: input;
+  font-size: 1.2rem;
+}
+.withdrawTabContainer input::placeholder {
+  color: #4f4f4f;
+  font-size: 1rem;
+}
+.receipientInput {
+  background-image: url(../../public/img33acdae0f/indent.png);
+  background-size: 100% 100%;
+  background-position: center;
+  outline: 0;
+  font-size: 1.2rem;
+  grid-area: input1;
+  width: 100%;
+  height: 60px;
+  color: #000;
+  padding: 0 0.6em;
+  margin: 0.2em 0;
+}
+
+.inp2Container {
+  grid-area: input2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.inp2Container * {
+  display: block;
+}
+.inp2Container input {
+  background-image: url(../../public/img33acdae0f/indent.png);
+  background-size: 100% 100%;
+  background-position: center;
+  outline: 0;
+  display: block;
+  font-size: 1rem;
+  width: 90%;
+  padding: 0 0.5em;
+  height: 50px;
+  margin: 0.2em 0;
+}
+.withdrawTitle H1{
+margin-top: 2em;
+font-size: 1.5rem;
+}
+.withdrawTitle em{
+  font-size: 1.1rem;
+}
+.withdrawTopInnerContainer p {
+  grid-area: txt;
+  font-size: 0.9rem;
+  width: 100%;
+  line-break: normal;
+  margin: 0.2em 0;
+}
+
+.withdrawIcons {
+  background-image: url(../../public/img33acdae0f/tab.png);
+  background-size: 100% 100%;
+  background-position: center;
+  width: 10%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.withdrawIcons img {
+  display: block;
+  width: 35px;
+  height: 35px;
+}
+.withdrawBottomInnerContainer{
+  background-image: url(../../public/img33acdae0f/borderLine.png);
+  background-size: 100% 100%;
+  background-position: center;
+  width: 88%;
+  margin: auto;
+  margin-bottom: 2em;
+  padding: 0.3em 0.2em;
+}
+.addMore {
+ 
+  width: 25%;
+  height: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.addMore svg
+{
+  background-image: url(../../public/img33acdae0f/tab.png);
+  width: 60px;
+  height: 30px;
+  padding: 0.2em 0;
+  background-position: center;
+  background-size: 100% 100%;
+}
+@media screen and (min-width: 610px) {
+  .depositContainer,
+  .withdrawTabContainer {
+    width: 65%;
+    margin: auto;
+  }
+  .tabButtonsContainer {
+    width: 65%;
+    margin: 0.8em auto;
+  }
+  .tabButtonsContainer button {
+    width: 25%;
+    height: 55px;
+    font-size: 1.1rem;
+  }
+
+  .depositInnerContainer div:nth-child(1) input {
+    height: 65px;
+    font-size: 1.4rem;
+  }
+  .withdrawAmountInput input {
+    height: 65px;
+  }
+  .icons {
+    height: 65px;
+  }
+
+  .icons[id="down"],
+  .icons[id="up"] {
+    height: calc(64px / 2);
+  }
+  .depositInnerContainer div:nth-child(2) input {
+    height: 65px;
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 1260px) {
+  .depositContainer,
+  .withdrawTabContainer {
+    width: 37%;
+    margin: auto;
+  }
+  .tabButtonsContainer {
+    width: 37%;
+    margin: 1.2em auto;
+  }
+  .tabButtonsContainer button {
+    width: 25%;
+    height: 55px;
+    font-size: 1.1rem;
+  }
+
+  .depositInnerContainer div:nth-child(1) input {
+    width: 100%;
+  }
+  .depositInnerContainer div:nth-child(1) input::placeholder {
+    font-size: 1.1rem;
+  }
+  .icons,
+  .withdrawIcons {
+    width: 10%;
+  }
+  .depositInnerContainer div:nth-child(2) {
+    width: 80%;
+  }
+}

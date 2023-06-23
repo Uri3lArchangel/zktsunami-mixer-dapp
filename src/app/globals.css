@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    /* user-select: none; */
+}
+:root,.root,#root,#docs-root{
+    --primary-light:#999999;
+    --primary-dark:#666666;
+    
+  
+}
+p,div,h1,h2,h3,h4,h5,h6,span,em{
+  user-select: none;
+}
+ .active{
+    background-image: url(../../public/img33acdae0f/tabpressed.png) !important;  
+    background-size: 100% 100%;
+    background-position: center;
+    padding: 0.5em 0.8em;
+    color: white;
+  
+}
+.no-arrows::-webkit-inner-spin-button,
+.no-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrows {
+  -moz-appearance: textfield;
+}
+.btn_highlight{
+  border: 1px solid #0000ff;
+  box-shadow: 1px 1px 10px #0000ff26;
+}

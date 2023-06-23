@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/BE/functions/schnorr.js", "src/BE/functions/client.js", "src/BE/functions/crypto/generateCookie.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/BE/functions/schnorr.js", "src/BE/functions/client.js", "src/BE/functions/crypto/generateCookie.js", "src/BE/functions/Deposit.js", "src/BE/functions/Withdrawal.js"],
   "exclude": ["node_modules"]
 }

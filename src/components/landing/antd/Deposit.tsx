@@ -146,8 +146,8 @@ const Deposit = () => {
       <p className=" select-text my-2">x: {keys?keys.hash[0]:''}</p>
       <p className=" select-text my-2">y: {keys?keys.hash[1]:''}</p>
       <p className=" select-text my-2">secret: {keys?.secretRefined?keys.secretRefined :''}</p>
-      <Button onClick={storeSecretKeys}>Store in browser storge</Button>
-      <Button onClick={clearSecret} danger>Clear from browser stroage</Button>
+      <Button onClick={storeSecretKeys} className="my-4">Store in browser storage</Button>
+      <Button onClick={clearSecret} danger>Clear from browser storage</Button>
     </Modal>
     <article className={utils.depositContainer}>
       <div className={utils.depositTitle}>

@@ -13,7 +13,7 @@ const Withdraw = () => {
   const Sref = useRef<HTMLInputElement>(null)
 
   const [Section, setSectionCount] = useState<React.JSX.Element[]>([
-    <WithdrawTopSection key={count} />,
+    <WithdrawTopSection  key={count} />,
   ]);
   const increase = () => {
     if (count < 5) {
@@ -52,7 +52,6 @@ for(let i=0;i<amountsInputs.length;i++){
 
     }else{
       status=false
-      console.log(isAddress(addressesInputs[i].value))
       message.destroy()
       message.error("Please enter a valid ethereum address at section"+i,5)
       return
@@ -81,7 +80,6 @@ let res = await fetch(process.env.NODE_ENV == "development"? '/api/generateWithd
 
 })
 if(res.status != 200){
-  console.log(res)
 message.destroy()
 message.error(`${await res.text()}`,3)
 return
@@ -106,6 +104,7 @@ message.error("error"+err.message,4)
 }
 
   useEffect(() => {
+ 
   }, [count]);
 
   return (
@@ -118,6 +117,7 @@ message.error("error"+err.message,4)
         </div>
         {Section.map((Sect, i) => { return(React.cloneElement(Sect, { key: i }))} )}
         <div className={utils.withdrawBottomInnerContainer}>
+        <p>Total amount to withdraw: <span id="totalTag">0</span> ETH</p>
           <div className={utils.addMore}>
             {count === 5 ? (
               <Tooltip title={"Max Reached"}>
@@ -152,7 +152,6 @@ message.error("error"+err.message,4)
               />
             )}
           </div>
-          <p></p>
           <h4>Enter your access keys</h4>
           <input type="text" ref={xref} className="block w-3/4 mx-auto h-10 my-2 px-2 placeholder:text-gray-200 border border-gray-500" placeholder="x" />
           <input type="text" ref={yref} className="block w-3/4 mx-auto h-10 my-2 px-2 placeholder:text-gray-200 border border-gray-500" placeholder="y" />

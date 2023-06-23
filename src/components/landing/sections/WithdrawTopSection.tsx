@@ -5,14 +5,38 @@ import React, { useRef, useState } from "react";
 import { AiFillCaretDown, AiFillCaretUp, AiOutlinePlus } from "react-icons/ai";
 import utils from "../../../styles/utils.module.css";
 import DropdownTokens from "../sections/Dropdown";
+interface obj{
+  [key:string]:number
+}
 
 const WithdrawTopSection = () => {
   const [token, selectToken] = useState("");
   const input_tokenRef = useRef<HTMLInputElement>(null);
   const [val, setVal] = useState<number | undefined>();
+  const [Index,setIndex] = useState(0)
+  let total=0;
+const change=()=>{
+  const len = (document.querySelectorAll('#tokenamount') as NodeListOf<HTMLInputElement>);
+  let a:obj={
+    "1":0,
+    "2":0,
+    "3":0,
+    "4":0,
+    "5":0
+  }
+  for(let i=0;i<len.length;i++){
+    if(!isNaN(parseFloat(len[i].value))){
+    a[`${i+1}`]=parseFloat(len[i].value);
+    }
+  };
+ total=a['1']+a['2']+a["3"]+a["4"]+a["5"];
+(document.getElementById('totalTag') as HTMLSpanElement).innerHTML=`${total.toFixed(2)}`;
+return
 
- 
- 
+
+  
+}
+  
 
   return (
     <>
@@ -70,6 +94,7 @@ const WithdrawTopSection = () => {
               value={val}
               defaultValue={val}
               min={1}
+              onChange={(e)=>{change()}}
               type="number"
               className="no-arrows"
               placeholder="Enter token amount in units"

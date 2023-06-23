@@ -76,6 +76,15 @@ align-items: center;
   padding: 0.3em 0.5em;
   font-size: 1rem;
 }
+.amountInput input{
+  background-image: url(../../public/img33acdae0f/indentInputWhite.png);
+  background-position: center;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 54px;
+  padding: 0 0.8em;
+  outline: 0;
+}
 .depositInnerContainer input::placeholder {
   color: #4f4f4f;
   font-size: 0.9rem;

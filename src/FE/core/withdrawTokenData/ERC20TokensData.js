@@ -1,64 +1,77 @@
-[
+import bnb from 'cryptocurrency-icons/128/color/bnb.png'
+import inch from 'cryptocurrency-icons/128/color/1inch.png'
+
+
+export const tokens=[
     {
         "name":"",
+        "symbol":"",
         "logoURI": "",
         "address": "",
         "decimals": null
     },
-    
-  {
-    "name": "Ethereum",
-    "logoURI": "https://tokens.1inch.io/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png",
-    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-    "decimals": 18
 
+  {
+    "name":"Binance USD",
+    "symbol":"BUSD",
+    "decimals": 18,
+    "address": "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
+    "logoURI": bnb
   },
   {
     "name": "Tether USD",
+    "symbol":"USDT",
     "logoURI": "https://tokens.1inch.io/0xdac17f958d2ee523a2206206994597c13d831ec7.png",
     "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
     "decimals": 6
   },
  
   {
-    "name": "Matic",
+    "name": "Matic Token",
+    "symbol":"MATIC",
     "decimals": 18,
     "address": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
     "logoURI": "https://tokens.1inch.io/0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0.png"
   },
   {
     "name": "USD Coin",
+    "symbol":"USDC",
     "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
     "decimals": 6,
     "logoURI": "https://tokens.1inch.io/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png"
   },
   {
     "name": "Chainlink",
+    "symbol":"LINK",
     "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
     "decimals": 18,
     "logoURI": "https://tokens.1inch.io/0x514910771af9ca656af840dff83e8264ecf986ca.png"
   },
   {
     "name": "Uniswap",
+    "symbol":"UNI",
     "decimals": 18,
     "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
     "logoURI": "https://tokens.1inch.io/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984.png"
   },
  
   {
-    "name": "Sand",
+    "name": "Balancer",
     "decimals": 18,
-    "address": "0x3845badade8e6dff049820680d1f14bd3903a5d0",
-    "logoURI": "https://tokens.1inch.io/0x3845badade8e6dff049820680d1f14bd3903a5d0.png"
+    "symbol":"BAL",
+    "address": "0xba100000625a3754423978a60c9317c58a424e3D",
+    "logoURI": "https://tokens.1inch.io/0xba100000625a3754423978a60c9317c58a424e3d.png",
   },
   {
     "name": "Ape Coin",
     "decimals": 18,
+    "symbol":"APE",
     "address": "0x4d224452801aced8b2f0aebe155379bb5d594381",
     "logoURI": "https://tokens.1inch.io/0x4d224452801aced8b2f0aebe155379bb5d594381.png"
   },
   {
-    "name": "MANA",
+    "name": "Decentraland",
+    "symbol":"MANA",
     "address": "0x0f5d2fb29fb7d3cfee444a200298f468908cc942",
     "decimals": 18,
     "logoURI": "https://tokens.1inch.io/0x0f5d2fb29fb7d3cfee444a200298f468908cc942.png"
@@ -66,17 +79,20 @@
   {
     "name": "Fantom Token",
     "decimals": 18,
+    "symbol":"FTM",
     "address": "0x4e15361fd6b4bb609fa63c81a2be19d873717870",
     "logoURI": "https://tokens.1inch.io/0x4e15361fd6b4bb609fa63c81a2be19d873717870.png"
   },
   {
     "name": "Shiba Inu",
     "decimals": 18,
+    "symbol":"SHIB",
     "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
     "logoURI": "https://tokens.1inch.io/0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce.png"
   },
   {
     "name": "Wrapped Bitcoin",
+    "symbol":"WBTC",
     "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
     "decimals": 8,
     "logoURI": "https://tokens.1inch.io/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599.png"
@@ -84,44 +100,52 @@
   {
     "name": "Dai Stablecoin",
     "decimals": 18,
+    "symbol":"DAI",
     "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
     "logoURI": "https://tokens.1inch.io/0x6b175474e89094c44da98b954eedeac495271d0f.png"
   },
   {
-    "name": "Cronos Coin",
-    "decimals": 8,
-    "address": "0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b",
-    "logoURI": "https://tokens.1inch.io/0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b.png"
+    "name": "1INCH Token",
+    "symbol":"1INCH",
+    "decimals": 18,
+    "address": "0x111111111117dC0aa78b770fA6A738034120C302",
+    "logoURI": inch
   },
   {
-    "name": "Pax Dollar",
+    "name": "Basic Attention Token",
+    "symbol":"BAT",
     "address": "0x8e870d67f660d95d5be530380d0ec0bd388289e1",
     "decimals": 18,
-    "logoURI": "https://tokens.1inch.io/0x8e870d67f660d95d5be530380d0ec0bd388289e1_1.png"
+    "logoURI": "https://tokens.1inch.io/0x0d8775f648430679a709e98d2b0cb6250d2887ef.png",
   },
   {
-    "name": "Aave",
+    "name": "Gnosis",
     "decimals": 18,
-    "address": "0xba3d9687cf50fe253cd2e1cfeede1d6787344ed5",
-    "logoURI": "https://tokens.1inch.io/0xba3d9687cf50fe253cd2e1cfeede1d6787344ed5.png"
+    "symbol":"GNO",
+    "address": "0x6810e776880C02933D47DB1b9fc05908e5386b96",
+    "logoURI": "https://tokens.1inch.io/0x6810e776880c02933d47db1b9fc05908e5386b96.png"
   },
   {
     "name": "Maker",
+    "symbol":"MKR",
     "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
     "decimals": 18,
     "logoURI": "https://tokens.1inch.io/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2.png"
   },{
-    "name":"sETH",
+    "name":"dYdX",
+    "symbol":'DYDX',
     "decimals": 18,
-    "address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
-    "logoURI": "https://tokens.1inch.io/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.png"
+    "address": "0x92D6C1e31e14520e676a687F0a93788B716BEff5",
+    "logoURI": "https://assets.coingecko.com/coins/images/17500/large/hjnIm9bV.jpg?1628009360"
   },{
-    "name":"Tether Gold",
-    "decimals": 6,
-    "address": "0x68749665ff8d2d112fa859aa293f07a622782f38",
-    "logoURI": "https://tokens.1inch.io/0x68749665ff8d2d112fa859aa293f07a622782f38.png"
+    "name":"BitDAO",
+    "symbol":"BIT",
+    "decimals": 18,
+    "address": "0x1A4b46696b2bB4794Eb3D4c26f1c55F9170fa4C5",
+    "logoURI": "https://tokens.1inch.io/0x1a4b46696b2bb4794eb3d4c26f1c55f9170fa4c5.png"
   },{
     "name":"Quant",
+    "symbol":"QNT",
     "decimals": 18,
     "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
     "logoURI": "https://tokens.1inch.io/0x4a220e6096b25eadb88358cb44068a3248254675.png"

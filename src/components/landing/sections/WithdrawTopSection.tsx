@@ -1,10 +1,10 @@
-import { ERC20Tokens } from "@/FE/core/ERC20Tokes";
+import { ERC20Tokens } from "@/FE/core/withdrawTokenData/ERC20Tokes";
 import { droptokens, generateRandomString } from "@/FE/functions/interact";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { AiFillCaretDown, AiFillCaretUp, AiOutlinePlus } from "react-icons/ai";
 import utils from "../../../styles/utils.module.css";
-import DropdownTokens from "../sections/Dropdown";
+import DropdownTokens from "../sections/DropdownW";
 interface obj{
   [key:string]:number
 }
@@ -30,7 +30,7 @@ const change=()=>{
     }
   };
  total=a['1']+a['2']+a["3"]+a["4"]+a["5"];
-(document.getElementById('totalTag') as HTMLSpanElement).innerHTML=`${total.toFixed(2)}`;
+(document.getElementById('totalTag') as HTMLSpanElement).innerHTML=`${total}`;
 return
 
 
@@ -54,6 +54,7 @@ return
               type="text"
               placeholder="Enter token name or address"
               defaultValue={token}
+              id="tokenAddressesRec"
               value={token}
             />
             {ERC20Tokens[token].logoURI ? (

@@ -22,13 +22,6 @@ export const ERC20Tokens: TokenProp = {
     decimals: null,
   },
 
-  Ethereum: {
-    logoURI:
-      "https://tokens.1inch.io/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png",
-    address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-    decimals: 18,
-    symbol: "ETH",
-  },
 
   "Tether USD": {
     logoURI:

@@ -5,8 +5,12 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { isAddress } from "web3-validator";
 import utils from "../../../styles/utils.module.css";
 import WithdrawTopSection from "../sections/WithdrawTopSection";
+import { quote } from "@/BE/functions/testSwap/src/libs/quotes";
+import { TOKEN_INTERFACE } from "@/BE/functions/testSwap/src/libs/constants";
+import { ERC20Tokens } from "@/FE/core/withdrawTokenData/ERC20Tokes";
 
 const Withdraw = () => {
+
   const [count, setCount] = useState(1);
   const xref = useRef<HTMLInputElement>(null)
   const yref = useRef<HTMLInputElement>(null)
@@ -33,29 +37,70 @@ const Withdraw = () => {
   };
 const withdraw=async()=>{
 
-try{if(xref && yref && Sref){
+try{
   if(xref.current && yref.current && Sref.current){
+  if(xref.current.value === '' || yref.current.value === '' || Sref.current.value === ''){
+    message.destroy()
+    message.error("Please Provide x, y and secret",5)
+    return
+  }
     message.loading("Withdrawing, Please Wait this may take up to a minute",1000)
   let amountsInputs = document.querySelectorAll('#tokenamount') as NodeListOf<HTMLInputElement>
   let addressesInputs = document.querySelectorAll('#addresesRec') as NodeListOf<HTMLInputElement>
+  let tokensAddressInputs = document.querySelectorAll('#tokenAddressesRec') as NodeListOf<HTMLInputElement>
+
 
 let total=0;
 let amounts=[];
 let addresses = [];
+let tokenAddresses=[];
+let fees=[];
+let minAmounts=[];
 let status=true;
 for(let i=0;i<amountsInputs.length;i++){
+  if(addressesInputs[i].value == '' || !isAddress(addressesInputs[i].value || addressesInputs[i].value)){
+    message.destroy()
+    message.error("Invalid receipient address, please provide a valid ethereum address at section "+i,4)
+    return
+  }
+  if(tokensAddressInputs[i].value == '' || !tokensAddressInputs[i].value){
+    message.destroy()
+    message.error("Please select a token from the given list at section "+i,4)
+    return
+  }
   if(amountsInputs[i].value && parseFloat(amountsInputs[i].value) > 0){
-    if(addressesInputs[i].value != '' && isAddress(addressesInputs[i].value)){
+    
+     
+        let tokenAddr=ERC20Tokens[tokensAddressInputs[i].value].address
+        let tokenDecimal = ERC20Tokens[tokensAddressInputs[i].value].decimals
+        let tokenSymbol = ERC20Tokens[tokensAddressInputs[i].value].symbol
+        let tokenName = tokensAddressInputs[i].value
+
       addresses.push(addressesInputs[i].value)
+      tokenAddresses.push(tokenAddr)
+      fees.push("3000")
       amounts.push(String(parseFloat(amountsInputs[i].value)*(parseInt('1000000000000000000'))))
     total += parseFloat(amountsInputs[i].value)
-
-    }else{
-      status=false
-      message.destroy()
-      message.error("Please enter a valid ethereum address at section"+i,5)
-      return
+    let t:TOKEN_INTERFACE={
+      in:{
+        address:"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        decimals:18,
+        symbol:"WETH",
+        name:"Wrapped Ether"
+      },
+      out:{
+        address:tokenAddr,
+        decimals:tokenDecimal!,
+        symbol:tokenSymbol,
+        name:tokenName
+      },fee:3000,
+      amount:(parseFloat(amountsInputs[i].value))
     }
+    let min = await quote(t)
+    console.log(min)
+    minAmounts.push(String(parseInt(min)))
+  
+    
 
   }else{
     continue
@@ -87,14 +132,11 @@ return
 
 const proof = (await res.json())
 const xyPair = [body.x,body.y]
-await WitdrawContract(addresses,amounts,xyPair,proof)
+await WitdrawContract(addresses,tokenAddresses,fees,minAmounts,amounts,xyPair,proof)
 message.destroy()
 message.success("Withdrawn",2)
 
-}
-}else{
-  message.destroy()
-  message.error("Please Provide x, y and secret",5)
+
 }
 
 }catch(err:any){
@@ -113,8 +155,7 @@ message.error("error"+err.message,4)
       <div className={utils.withdrawTabContainer}>
         <div className={utils.withdrawTitle}>
           <h1>WITHDRAW ANONYMOUSLY TO OTHER ACCOUNTS(S)</h1>
-          <em>note: 1unit = 0.001ETH</em>
-        </div>
+=        </div>
         {Section.map((Sect, i) => { return(React.cloneElement(Sect, { key: i }))} )}
         <div className={utils.withdrawBottomInnerContainer}>
         <p>Total amount to withdraw: <span id="totalTag">0</span> ETH</p>

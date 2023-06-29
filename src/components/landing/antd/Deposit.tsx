@@ -10,6 +10,11 @@ import { splitNumber } from "@/BE/functions/shift";
 import { web3Deposit } from "@/BE/functions/Deposit";
 import { Button, message } from "antd";
 import {  Modal } from 'antd';
+import { swapDeposit } from "@/BE/functions/depositTokenSwap";
+import {approve} from '../../../BE/functions/swap/test'
+import { convertETH_WETH } from "@/BE/functions/swap/InchRequest";
+import { TOKEN_INTERFACE } from "@/BE/functions/testSwap/src/libs/constants";
+import { quote } from "@/BE/functions/testSwap/src/libs/quotes";
 
 interface Keys
   {
@@ -18,7 +23,7 @@ interface Keys
   }
 
 const Deposit = () => {
-  const input_tokenRef = useRef<HTMLInputElement>(null);
+  const tokenAddress = useRef<HTMLInputElement>(null)
   const [val, setVal] = useState<number>(1);
   const [token, selectToken] = useState("");
   const [account, setAccount] = useState<string>();
@@ -48,7 +53,7 @@ const Deposit = () => {
   const inputChange = ()=>{
     if(unitInputRef.current){
       if(parseInt(unitInputRef.current.value) < 1 || isNaN(parseInt(unitInputRef.current.value))){
-        (document.getElementById('depositInput') as HTMLInputElement).value='1'
+        (document.getElementById('depositInput') as HTMLInputElement).value=''
       }
     setVal(parseInt(unitInputRef.current.value))
     }
@@ -67,19 +72,73 @@ const Deposit = () => {
   const deposit = async()=>{
    try{ 
     if(keyRef.current && keyRef.current.value.length > 0){
-    if(unitInputRef.current){
-      message.loading("Depositing Please Wait",1000)
-      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value)
+      if(unitInputRef.current){
+      if(isNaN(parseInt(unitInputRef.current.value))){
+        message.destroy()
+        message.error("Please enter a valid unit amount")
+        return
+
+      }
+      if(!tokenAddress.current || tokenAddress.current!.value == ''){
+        message.destroy()
+          message.error("Please specify your deposit token",5)
+          return
+      }
+     
+    const tokenName = tokenAddress.current!.value
+    const token =ERC20Tokens[tokenName]
+
+    if(!account){
       message.destroy()
+      message.error("No account dectected please connect a metamask account")
+      return
+    }
+    let t:TOKEN_INTERFACE={
+      in:{
+        address:"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        decimals:18,
+        symbol:"WETH",
+        name:"Wrapped Ether"
+      },
+      out:{
+        address:token.address,
+        decimals:token.decimals!,
+        symbol:token.symbol,
+        name:tokenName
+      },fee:3000,
+      amount:parseFloat(String((parseInt(unitInputRef.current.value)* parseInt('100000000000000'))/parseInt('1000000000000000000')))
+    }
+    console.log(t.amount)
+    let o = parseFloat(await quote(t))
+    let max = parseInt(String((o+(0.3*o))*parseInt('1000000000000000000')))
+    console.log(max)
+
+  
+      message.loading("Depositing Please Wait",1000)
+      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,token.address,account,max,t.fee)
+      
+      message.destroy()
+      if(hash.hash && hash.secretRefined){
       setKeys({hash:JSON.parse(hash.hash),secretRefined:hash.secretRefined})
       showModal()
       document.getElementById('keyReveal')!.style.display = 'block'
+
+
       return
+      }
     }
-  }}catch(err:any){
+  }else{
+    message.destroy()
+    message.error("Provide a unique secret key",5)
+  }
+
+}catch(err:any){
   
     message.destroy()
     message.error(err.message,4)
+    setTimeout(()=>{
+      window.location.reload()
+    },4000)
     return
   }
   }
@@ -152,7 +211,7 @@ const Deposit = () => {
     <article className={utils.depositContainer}>
       <div className={utils.depositTitle}>
         <h1>DEPOSIT YOUR CRYPTO TO THE MIXER</h1>
-        <em>note: 1unit = 0.001ETH</em>
+        <em>note: 1unit = 0.0001ETH</em>
       </div> 
       <input
         ref={keyRef} 
@@ -186,6 +245,7 @@ const Deposit = () => {
       <div className={utils.depositInnerContainer}>
         <div className={utils.tokenInput}>
           <input
+          ref={tokenAddress}
             type="text"
             placeholder="Select Token"
             defaultValue={token}
@@ -218,17 +278,17 @@ const Deposit = () => {
 
           <DropdownTokens select={selectToken} />
         </div>
-        <p>Select Token Amount to Deposit</p>
+        <p>Select Token Amount to Deposit in units</p>
         <div className={utils.amountInput}>
-        <input type="number" onChange={inputChange} className="no-arrows" min={1} ref={unitInputRef} id="depositInput" />
+        <input type="number" onChange={inputChange} className="no-arrows" min={1}  ref={unitInputRef} id="depositInput" />
               {/* <button id="unit" onClick={(e)=>{setVal(1);selsctUnit(e)}}>1 Unit</button>
               <button id="unit"  onClick={(e)=>{setVal(10);selsctUnit(e)}}>10 Units</button>
               <button id="unit"  onClick={(e)=>{setVal(100);selsctUnit(e)}}>100 Units</button>
               <button id="unit"  onClick={(e)=>{setVal(500);selsctUnit(e)}}>500 Units</button>
               <button id="unit"  onClick={(e)=>{setVal(1000);selsctUnit(e)}}>1000 Units</button> */}
         </div>
-        <p className="mt-5 text-md">
-          {val}units = {(val * 0.01).toFixed(2)} Tokens
+        <p className="mt-5 text-md text-red-600">
+          {isNaN(val)?'0':val}units = {isNaN(val)?'0':(val * 0.0001).toFixed(4)} ETH of Token
         </p>
         <button
           onClick={

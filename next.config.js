@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        domains:["tokens.1inch.io"]
+        domains:["tokens.1inch.io","assets.coingecko.com"]
     }
 }
 

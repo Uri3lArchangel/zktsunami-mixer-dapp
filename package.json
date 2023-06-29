@@ -13,8 +13,11 @@
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
+    "@uniswap/sdk-core": "^3.2.6",
+    "@uniswap/v3-sdk": "^3.9.0",
     "antd": "^5.5.2",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "bignumber": "^1.1.0",
     "bignumber.js": "^9.1.1",
     "bip32": "^4.0.0",
@@ -22,6 +25,7 @@
     "bufferutil": "^4.0.7",
     "cookie": "^0.5.0",
     "crypto-js": "^4.1.1",
+    "cryptocurrency-icons": "^0.18.1",
     "ecpair": "^2.1.0",
     "elliptic": "^6.5.4",
     "encoding": "^0.1.13",
@@ -40,6 +44,7 @@
     "utf-8-validate": "^5.0.10",
     "web3": "^4.0.1",
     "web3-validator": "^1.0.0",
+    "yesno": "^0.4.0",
     "zokrates-js": "^1.1.8"
   },
   "devDependencies": {

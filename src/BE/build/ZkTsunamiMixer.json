@@ -6,9 +6,78 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_baseTokenWETH",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "Admin",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_token",
+						"type": "address"
+					}
+				],
+				"name": "balance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "baseTokenWETH",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "newAdmin",
+						"type": "address"
+					}
+				],
+				"name": "changeAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -16,6 +85,21 @@
 						"internalType": "uint256",
 						"name": "amount",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "max",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint24",
+						"name": "fee",
+						"type": "uint24"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
 					}
 				],
 				"name": "depositBase",
@@ -43,13 +127,86 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "totalAmount",
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "outToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint24",
+						"name": "fee",
+						"type": "uint24"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minAmountOut",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactInputSingle",
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "amountOut",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountInMaximum",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "inToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint24",
+						"name": "fee",
+						"type": "uint24"
+					}
+				],
+				"name": "swapExactOutputSingle",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "swapRouter",
+				"outputs": [
+					{
+						"internalType": "contract ISwapRouter",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -135,13 +292,28 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "tokenAddresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint24[]",
+						"name": "_fee",
+						"type": "uint24[]"
+					},
+					{
 						"internalType": "address payable[]",
 						"name": "accounts",
 						"type": "address[]"
 					},
 					{
 						"internalType": "uint256[]",
-						"name": "amounts",
+						"name": "minAmounts",
 						"type": "uint256[]"
 					},
 					{
@@ -208,7 +380,7 @@
 						"type": "tuple"
 					}
 				],
-				"name": "withdrawBase",
+				"name": "withdrawERC20",
 				"outputs": [
 					{
 						"internalType": "uint8",
@@ -233,7 +405,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/mixer/mixer.sol": "ZkTunami_Mixer"
+			"contracts/mixer/mixer_flattened.sol": "ZkTunami_Mixer"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -241,33 +413,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
-			"keccak256": "0x190dd6f8d592b7e4e930feb7f4313aeb8e1c4ad3154c27ce1cf6a512fc30d8cc",
+		"contracts/mixer/mixer_flattened.sol": {
+			"keccak256": "0x8d45396a4056c73fff3f78a0877d94b0af24893c81b7d5117e100b978901d8e1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4ce8dfb62d0c4fa260d6eec8f1cd47f5f2a044e11bde5b31d18072fa6e7d9010",
-				"dweb:/ipfs/QmTyFztU3tLEcEDnqqiaW4UJetqsU77LXc6pjc9oTXCK5u"
-			]
-		},
-		"contracts/mixer/mixer.sol": {
-			"keccak256": "0xb01c6b3f5d1d80d7d2359f134cca1247744cc1b0913bae4970770953454876a6",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://f856b9ac287dd7e86c7e8519c15ffcb8a351bf28901b656bef7b5066e342a1dc",
-				"dweb:/ipfs/QmRPqHydRHxkeJ4nppWdhStekhRhPb5CEEjT6yGCtovFNk"
-			]
-		},
-		"contracts/mixer/verifier.sol": {
-			"keccak256": "0x8ac5546449934982eb2e4d5abb949c1d6d3ee596a9091b2a211280bfa583db6a",
-			"urls": [
-				"bzz-raw://0c385d255dfb27324fb3a745f535677bc663a42d3bbaea9c4da401e0265d17bb",
-				"dweb:/ipfs/Qmaot68V5qDUqddT7D3yeRWuzXcSyCw57ZwQMFnEtFMWND"
+				"bzz-raw://ee42569a4e43e3bbab3b84f9df3e854ea7d9bf77a7614d7779e6b758b0b667e0",
+				"dweb:/ipfs/QmRKFArs7JW4BUuozpgqjpAixeXCdcHmvmewcyc12jwShn"
 			]
 		}
 	},

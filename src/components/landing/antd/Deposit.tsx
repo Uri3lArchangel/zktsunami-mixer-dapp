@@ -86,7 +86,8 @@ const Deposit = () => {
       }
      
     const tokenName = tokenAddress.current!.value
-    const token =ERC20Tokens[tokenName]
+    const _token =ERC20Tokens[tokenName]
+    console.log(_token.address)
 
     if(!account){
       message.destroy()
@@ -101,21 +102,20 @@ const Deposit = () => {
         name:"Wrapped Ether"
       },
       out:{
-        address:token.address,
-        decimals:token.decimals!,
-        symbol:token.symbol,
+        address:_token.address,
+        decimals:_token.decimals!,
+        symbol:_token.symbol,
         name:tokenName
       },fee:3000,
       amount:parseFloat(String((parseInt(unitInputRef.current.value)* parseInt('100000000000000'))/parseInt('1000000000000000000')))
     }
-    console.log(t.amount)
     let o = parseFloat(await quote(t))
-    let max = parseInt(String((o+(0.3*o))*parseInt('1000000000000000000')))
+    let max = parseInt(String((o+(0.3*o))*parseInt(`${10**_token.decimals!}`)))
     console.log(max)
 
   
       message.loading("Depositing Please Wait",1000)
-      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,token.address,account,max,t.fee)
+      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,account,max,t.fee,_token.decimals)
       
       message.destroy()
       if(hash.hash && hash.secretRefined){
@@ -133,12 +133,11 @@ const Deposit = () => {
   }
 
 }catch(err:any){
-  
     message.destroy()
     message.error(err.message,4)
-    setTimeout(()=>{
-      window.location.reload()
-    },4000)
+    // setTimeout(()=>{
+    //   window.location.reload()
+    // },4000)
     return
   }
   }

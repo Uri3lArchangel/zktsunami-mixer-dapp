@@ -9,7 +9,8 @@ import IERC20  from '../build/IERC20.json'
 
 const addr = "0xe2F5798d424Cb41c465f5E45e53C5205e2590f16"
 
-export const web3Deposit=async(amount,key,token,account,max,fee)=>{
+export const web3Deposit=async(amount,key,token,account,max,fee,decimal)=>{
+  console.log(max)
 const provider =  new ethers.BrowserProvider(window.ethereum) 
 const web3 = new Web3(window.ethereum)
 const signer = await provider.getSigner()
@@ -25,7 +26,7 @@ r.push(`${BigInt(amount * parseInt('100000000000000'))}`)
 let hash=await proofDeposit(r)
 const Amount = (parseInt(amount) * parseInt("100000000000000"))
 
-if(ERC20Tokens[token].address == "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"){
+if(token== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"){
    
     let r= await convertETH_WETH(Amount,account)
     

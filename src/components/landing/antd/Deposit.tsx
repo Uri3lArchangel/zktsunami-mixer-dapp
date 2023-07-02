@@ -91,7 +91,7 @@ const Deposit = () => {
 
     if(!account){
       message.destroy()
-      message.error("No account dectected please connect a metamask account")
+      message.error("No account detected please connect a metamask account")
       return
     }
     let t:TOKEN_INTERFACE={

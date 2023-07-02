@@ -46,7 +46,7 @@ return
           <input
             type="text"
             className={utils.receipientInput}
-            placeholder="Enter Receipient Address"
+            placeholder="Enter Recipient Address"
             id="addresesRec"
           />
           <div className={utils.inp2Container + " relative"}>

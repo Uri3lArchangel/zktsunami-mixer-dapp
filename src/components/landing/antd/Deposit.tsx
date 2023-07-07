@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ethers } from "ethers";
 import { ERC20Tokens } from "@/FE/core/ERC20Tokes";
 import { splitNumber } from "@/BE/functions/shift";
-import { web3Deposit } from "@/BE/functions/Deposit";
+import { web3Deposit, web3DepositETH } from "@/BE/functions/Deposit";
 import { Button, message } from "antd";
 import {  Modal } from 'antd';
 import { swapDeposit } from "@/BE/functions/depositTokenSwap";
@@ -87,13 +87,16 @@ const Deposit = () => {
      
     const tokenName = tokenAddress.current!.value
     const _token =ERC20Tokens[tokenName]
-    console.log(_token.address)
 
     if(!account){
       message.destroy()
       message.error("No account detected please connect a metamask account")
       return
     }
+    message.loading("Depositing Please Wait",1000)
+
+    if(_token.address != '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'){
+
     let t:TOKEN_INTERFACE={
       in:{
         address:"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
@@ -109,22 +112,28 @@ const Deposit = () => {
       },fee:3000,
       amount:parseFloat(String((parseInt(unitInputRef.current.value)* parseInt('100000000000000'))/parseInt('1000000000000000000')))
     }
+  
+
     let o = parseFloat(await quote(t))
     let max = parseInt(String((o+(0.3*o))*parseInt(`${10**_token.decimals!}`)))
-    console.log(max)
-
-  
-      message.loading("Depositing Please Wait",1000)
-      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,account,max,t.fee,_token.decimals)
-      
+    
+      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,max,t.fee)
       message.destroy()
+
       if(hash.hash && hash.secretRefined){
       setKeys({hash:JSON.parse(hash.hash),secretRefined:hash.secretRefined})
       showModal()
       document.getElementById('keyReveal')!.style.display = 'block'
-
-
-      return
+      }
+      }else{
+        let hash = await web3DepositETH(unitInputRef.current.value,keyRef.current.value)
+        message.destroy()
+  
+        if(hash.hash && hash.secretRefined){
+        setKeys({hash:JSON.parse(hash.hash),secretRefined:hash.secretRefined})
+        showModal()
+        document.getElementById('keyReveal')!.style.display = 'block'
+        }
       }
     }
   }else{
@@ -172,15 +181,7 @@ const Deposit = () => {
       message.success("cleared",2)
     }
   }
-// const selsctUnit=(e:React.MouseEvent<HTMLButtonElement>)=>{
-// let buttons = document.querySelectorAll('#unit') as NodeListOf<HTMLButtonElement>
-// for(let i=0;i<buttons.length;i++){
-//   if(buttons[i].classList.contains('btn_highlight')){
-//   buttons[i].classList.remove('btn_highlight')
-//   }
-// }
-// e.currentTarget.classList.add('btn_highlight')
-// }
+
   useEffect(() => {
     init(); 
 

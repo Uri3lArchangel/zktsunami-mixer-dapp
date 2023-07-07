@@ -19,10 +19,10 @@ const pixel = Pixel({
 });
 
 export const metadata:Metadata = {
-  title: "Anon-Chain | mixer dapp",
+  title: "Zk-Tsunami | mixer dapp",
  
   description:
-    "Anon-chain mixer dapp powered by the suter shield protocol ease of interface, maximum privacy, anonymity, security, decentralization and processing ",
+    "ZK-Tsunami mixer dapp powered by the suter shield protocol ease of interface, maximum privacy, anonymity, security, decentralization and processing ",
     keywords:"Anonymity, Mixer, zk-snark, zk-tsunami, dapp, blockchain, privacy",
     
 };

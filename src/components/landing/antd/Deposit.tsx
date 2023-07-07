@@ -90,7 +90,7 @@ const Deposit = () => {
 
     if(!account){
       message.destroy()
-      message.error("No account detected please connect a metamask account")
+      message.error("No account detected please connect a wallet account")
       return
     }
     message.loading("Depositing Please Wait",1000)

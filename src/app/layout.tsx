@@ -23,6 +23,8 @@ export const metadata:Metadata = {
  
   description:
     "Anon-chain mixer dapp powered by the suter shield protocol ease of interface, maximum privacy, anonymity, security, decentralization and processing ",
+    keywords:"Anonymity, Mixer, zk-snark, zk-tsunami, dapp, blockchain, privacy",
+    
 };
 
 export default function RootLayout({

@@ -72,45 +72,53 @@
 
 
 }
-
-.landing2_container{
-    padding: 0.5em 0.3em;
-    /* height: fit-content; */
-    margin: 0.3em 0.5em;
-    height: 60%;
+.section2_container {
+  padding: 2.5em 0;
+  background-color: black;
+  color: white;
 }
-.landing2_container > div{
-transform: translateX(-90%);
-height: 28%;
+.innerSectionContainer{
+  display: flex;
+  flex-direction: column;
 width: 100%;
-background-image: url(../../public/img33acdae0f/tab.png);
-background-size: 100% 100%;
-margin: 0.1em 0;
-opacity: 0;
-background-position: center;
-animation-name: slidein_mobile;
-animation-play-state: paused;
-animation-duration: 2s;
-animation-iteration-count: 1;
-animation-delay: var(--delay);
-animation-fill-mode: forwards;
-
+height: 100%;
+align-items: center;
 }
-.landing2_buttons{
-  height: fit-content;
+.outerSectionContainer{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.outerSectionContainer h3{
+  font-size: 1.4rem;
+  text-decoration: underline;
 }
 
-.landing2_container figure{
-  width: 94%;
+.section2_container h2{
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
 }
-.landing2_img img{
-  height: 100%;
+.section2_container img{
   width: 100%;
+  height: 100%;
 }
-.landing2_img{
-  height: 89%;
-  width: 27%;
+.outerSectionContainer section{
+  height: fit-content;
+
+  width:75% ;
+  height: fit-content;
+  color: white;
+  border: 1px solid #fff8;
+  margin: 0.7em 0;
 }
+
+.outerSectionContainer figcaption,.outerSectionContainer text{
+
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 .landing3_tab3Container{
 
   width: 100%;
@@ -172,6 +180,18 @@ font-size: 1rem;
   }
   .landing3_tab3Container article p{
   font-size: 1.0rem;
+  }.outerSectionContainer{
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: flex-start;
+
+  }
+  .innerSectionContainer{
+    width: 50%;
+
+  }
+  .outerSectionContainer section{
+  width: 65%;
   }
 }
 @media screen and (min-width:1024px) {
@@ -207,4 +227,7 @@ font-size: 1rem;
   .landing3_tab3Container article p{
   font-size: 1.4rem;
   }
+  .outerSectionContainer section{
+    width: 50%;
+    }
 }

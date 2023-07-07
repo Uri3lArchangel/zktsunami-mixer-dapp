@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import React from "react";
 
 export const btnclick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +40,7 @@ export const droptokens = (state:string,e?:React.MouseEvent<HTMLSpanElement>)=>{
   if(!isDropOpen){
   let ul = document.getElementById('erc20') as HTMLUListElement
   ul.style.visibility = "visible";
-  ul.style.height = "200px"
+  ul.style.height = "300px"
   isDropOpen=true
   }else{
     let ul = document.getElementById('erc20') as HTMLUListElement
@@ -75,4 +76,22 @@ export function generateRandomString() {
   }
 
   return randomString;
+}
+interface Token{
+  name:string;
+  symbol:string
+  logoURI: string | StaticImageData,
+  address: string,
+  decimals: number | null
+}
+export const searchTokens = (tokenArray:Token[],text:string)=>{
+  let temp = []
+for(let i=0;i<tokenArray.length;i++){
+  if(((tokenArray[i].name.toLocaleLowerCase())).includes((text.toLocaleLowerCase()))){
+    temp.push(tokenArray[i])
+  }else{
+    continue
+  }
+}
+return temp
 }

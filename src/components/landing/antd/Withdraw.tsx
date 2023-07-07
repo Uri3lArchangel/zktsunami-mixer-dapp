@@ -151,7 +151,7 @@ message.error("error"+err.message,4)
 
   return (
     <article>
-        <em className="mt-40 text-red-600 text-center text-lg">Note: Please we use full one time withdrawal meaning the total amount you want to withdraw must be equal to the total amount you have deposited per key, if your total does not match your deposit the withdrawal won&apos;t work</em>
+        <div style={{textAlign:'center',width:'40%',margin:'1em auto',color:'red',fontSize:'1.3rem'}}>Please ensure that your withdrawal total amount matches the deposit amount made per key, as any mismatch will prevent the withdrawal.</div>
       <div className={utils.withdrawTabContainer}>
         <div className={utils.withdrawTitle}>
           <h1>WITHDRAW ANONYMOUSLY TO OTHER ACCOUNTS(S)</h1>

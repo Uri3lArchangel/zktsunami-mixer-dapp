@@ -2,6 +2,7 @@ import bnb from 'cryptocurrency-icons/128/color/bnb.png'
 import inch from 'cryptocurrency-icons/128/color/1inch.png'
 
 
+
 export const tokens=[
     {
         "name":"",

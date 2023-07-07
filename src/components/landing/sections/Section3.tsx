@@ -19,9 +19,8 @@ const Section3 = () => {
             <article>
               <p>
                 Deposit your funds for later withdrawal or transfer to another
-                address all done anonymously to ensure users maximum privacy
-                Deposits are done in discrete quantities to improve privacy.
-            
+                address all done anonymously.
+              <br />
                 <em className='text-xl text-red-500'>
                 After Depositing you will receive keys which you must keep secret and safe
                 as they are what you will use to verify your deposit and withdraw your money 
@@ -37,7 +36,7 @@ const Section3 = () => {
             <article>
               <p>
                 Deposit your funds for later withdrawal to multiple other addresses all done simultaneously with different choice of tokens 
-             
+              <br />
                 <em className='text-xl text-red-500'>
                 You would need to pass the keys you were given during deposit at withdrawal
                 Ensure the total amount you withdraw at a go (per key) is equal to the total amount deposited of whose key you want to use

@@ -36,9 +36,12 @@ export default function RootLayout({
     <link rel="icon" href="/img33acdae0f/logo.ico" />
    </head>
       <body className={`${pixel.className}`}>
+   
         <Header_Footer_Layout>
         <main>{children}</main>
         </Header_Footer_Layout>
+    
+
       </body>
     </html>
   );

@@ -11,16 +11,16 @@ export const { chains, publicClient } = configureChains(
   [mainnet],
   [infuraProvider({apiKey:'874d9ca546c443be90882161ff27c213'}), publicProvider()]
 );
-
+const id = "f83198677be92921e4252b26b0679aeb"
 const  connectors  = connectorsForWallets([
   {
     groupName:'Recommended',
     wallets:[
       injectedWallet({chains}),
-      walletConnectWallet({projectId:"072dda5dd0ec7e265fcc7345db17e758",chains}),
-      trustWallet({chains,projectId:"072dda5dd0ec7e265fcc7345db17e758"}),
+      walletConnectWallet({projectId:id,chains}),
+      trustWallet({chains,projectId:id}),
       coinbaseWallet({appName:"ZK-Tsunami Mixer",chains}),
-      metaMaskWallet({projectId:"072dda5dd0ec7e265fcc7345db17e758",chains}),
+      metaMaskWallet({projectId:id,chains}),
     ]
 }]);
 export const wagmiConfig = createConfig({

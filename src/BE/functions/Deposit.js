@@ -33,7 +33,7 @@ export const web3DepositETH=async(amount,key)=>{
 
 }
 
-export const web3Deposit=async(amount,key,token,max,fee,decimal)=>{
+export const web3Deposit=async(amount,key,token,max,fee)=>{
   const provider =  new ethers.BrowserProvider(window.ethereum) 
   const web3 = new Web3(window.ethereum)
   const signer = await provider.getSigner()

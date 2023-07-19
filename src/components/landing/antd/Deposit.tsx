@@ -137,7 +137,7 @@ const Deposit = ({contractAddr}:any) => {
   
     let o = parseFloat(await quote2(t))
     let max = parseInt(String((o+(0.8*o))*parseInt(`${10**_token.decimals!}`)))
-      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,max,t.fee,_token.decimals)
+      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,max,t.fee)
 
       message.destroy()
 

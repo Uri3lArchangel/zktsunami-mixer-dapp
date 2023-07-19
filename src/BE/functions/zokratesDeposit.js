@@ -19,7 +19,7 @@ console.log(1)
       `;
       console.log(3)
 
-  const artifacts = zokratesProvider.compile(source);
+  const artifacts = zokratesProvider.compile(JSON.stringify(source));
   console.log(4)
 
   const { witness, output } = zokratesProvider.computeWitness(artifacts,(a));

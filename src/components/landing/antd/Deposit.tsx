@@ -1,20 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import utils from "../../../styles/utils.module.css";
-import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
+import { AiFillCaretDown } from "react-icons/ai";
 import { btnclick, btnunClick, droptokens } from "@/FE/functions/interact";
 import DropdownTokens from "../sections/Dropdown";
 import Image from "next/image";
 import { ethers } from "ethers";
 import { ERC20Tokens } from "@/FE/core/ERC20Tokes";
-import { splitNumber } from "@/BE/functions/shift";
 import { web3Deposit, web3DepositETH } from "@/BE/functions/Deposit";
 import { Button, message } from "antd";
 import {  Modal } from 'antd';
-import { swapDeposit } from "@/BE/functions/depositTokenSwap";
-import {approve} from '../../../BE/functions/swap/test'
-import { convertETH_WETH } from "@/BE/functions/swap/InchRequest";
 import { TOKEN_INTERFACE } from "@/BE/functions/testSwap/src/libs/constants";
-import { quote, quote2 } from "@/BE/functions/testSwap/src/libs/quotes";
+import {  quote2 } from "@/BE/functions/testSwap/src/libs/quotes";
 
 
 
@@ -27,14 +23,12 @@ interface Keys
 
 const Deposit = ({contractAddr}:any) => {
   const tokenAddress = useRef<HTMLInputElement>(null)
-  const [quote,setQuote]=useState<{symbol:string |null,quote:number | null}>({symbol:null,quote:null})
+  const [quote,setQuote]=useState<{symbol:string |null,quote:number|string | null}>({symbol:null,quote:null})
   const [val, setVal] = useState<number>(1);
   const [token, selectToken] = useState("");
   const [account, setAccount] = useState<string>();
-  const [keyState, setKey] = useState<string | null>(null);
   const keyRef = useRef<HTMLInputElement>(null)
   const unitInputRef = useRef<HTMLInputElement>(null)
-  const [mixer,initMixer]=useState(null)
   const [modalState,setModal] = useState(false)
   const [keys,setKeys] = useState<Keys>() 
   const [isModalOpen, setIsModalOpen] = useState(modalState);
@@ -42,7 +36,7 @@ const Deposit = ({contractAddr}:any) => {
 
 
 
-
+// Keys modal visiblity functions
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -53,6 +47,12 @@ const Deposit = ({contractAddr}:any) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+
+
+
+//  handles deposit input changes
+
   const inputChange = async()=>{
     if(unitInputRef.current){
       if(parseInt(unitInputRef.current.value) < 1 || isNaN(parseInt(unitInputRef.current.value))){
@@ -70,11 +70,7 @@ const Deposit = ({contractAddr}:any) => {
 
 
 
-
-
-
-
-
+  // generates teh private key 
   const generatePrivateKey = async (a: string) => {
      let g = await fetch(process.env.NODE_ENV == "development"?"/api/randomString?address=" + a:window.location.origin +"/api/randomString?address=" + a, {
       method: "GET",
@@ -91,7 +87,7 @@ const Deposit = ({contractAddr}:any) => {
 
 
 
-
+// deposit function is called on deposit
   const deposit = async()=>{
    try{ 
     if(keyRef.current && keyRef.current.value.length > 0){
@@ -172,7 +168,7 @@ const Deposit = ({contractAddr}:any) => {
   }
   }
 
-
+// this handles the second token based conversion
   const changeInput = async()=>{
     if(isNaN(parseInt(unitInputRef.current!.value)) ){
     setQuote({symbol:null,quote:null})
@@ -187,7 +183,7 @@ const Deposit = ({contractAddr}:any) => {
       return
     }
     if(_token.address != '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'){
-
+      setQuote({symbol:'',quote:'Loading...'})
       let t:TOKEN_INTERFACE={
         in:{
           address:"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
@@ -213,7 +209,7 @@ const Deposit = ({contractAddr}:any) => {
   
 
 
-
+// storage of keys 
   const storeSecretKeys = ()=>{
     if(keys){
     window.localStorage.setItem('SecretKeys',JSON.stringify(keys))
@@ -224,7 +220,7 @@ const Deposit = ({contractAddr}:any) => {
 
 
 
-
+// show keys
   const revealSectret=()=>{
   
     if(window.localStorage.getItem('SecretKeys')){
@@ -243,7 +239,7 @@ const Deposit = ({contractAddr}:any) => {
   }
 
 
-
+// celar keys from browser storage
   const clearSecret=()=>{
     if(window.localStorage.getItem('SecretKeys')){
       window.localStorage.removeItem('SecretKeys')
@@ -273,7 +269,7 @@ const Deposit = ({contractAddr}:any) => {
       document.getElementById('keyReveal')!.style.display = 'hidden'
 
     }
-  }, [val, account, keyState,modalState]);
+  }, [val, account,modalState]);
 
   return (
     <>
@@ -304,12 +300,16 @@ const Deposit = ({contractAddr}:any) => {
         onClick={async () => {
           let signer = await init();
           if (signer) {
+            (document.getElementById("secretInput") as HTMLInputElement).style.color="#666";
+            (document.getElementById("secretInput") as HTMLInputElement).value="Generating..";
+
             let key =(await generatePrivateKey(signer));
 
-            if (key)
-              (
-                document.getElementById("secretInput") as HTMLInputElement
-              ).value = key;
+            if (key){
+              (document.getElementById("secretInput") as HTMLInputElement).style.color="#000";
+              (document.getElementById("secretInput") as HTMLInputElement).value = key;
+            }
+              
           } else {
             throw new Error("Account not detected");
           }

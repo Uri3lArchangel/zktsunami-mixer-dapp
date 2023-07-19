@@ -20,8 +20,10 @@ export const web3DepositETH=async(amount,key)=>{
   let secretRefined = `${(parseInt(Math.random()*10)*(parseInt(Math.random()*25)))}${key}`
   let r=splitNumber(secretRefined)
   r.push(`${BigInt(amount * parseInt('100000000000000'))}`)
-  const data = await fetch(process.env.NODE_ENV == "development"?"/api/depositCompute_Tag001":window.location.origin +"/api/depositCompute_Tag001",{method:'POST',mode:'no-cors',body:JSON.stringify({r})})
-  const hash = await data.json()
+  // const data = await fetch(process.env.NODE_ENV == "development"?"/api/depositCompute_Tag001":window.location.origin +"/api/depositCompute_Tag001",{method:'POST',mode:'no-cors',body:JSON.stringify({r})})
+  // const hash = await data.json()
+  const hash =await proofDeposit(r)
+
   const Amount = (parseInt(amount) * parseInt("100000000000000"))
   
    await convertETH_WETH(Amount,a)
@@ -45,8 +47,9 @@ export const web3Deposit=async(amount,key,token,max,fee)=>{
 let secretRefined = `${(parseInt(Math.random()*10)*(parseInt(Math.random()*25)))}${key}`
 let r=splitNumber(secretRefined)
 r.push(`${BigInt(amount * parseInt('100000000000000'))}`)
-const data = await fetch(process.env.NODE_ENV == "development"?"/api/depositCompute_Tag001":window.location.origin +"/api/depositCompute_Tag001",{method:'POST',mode:'no-cors',body:JSON.stringify({r})})
-const hash = await data.json()
+// const data = await fetch(process.env.NODE_ENV == "development"?"/api/depositCompute_Tag001":window.location.origin +"/api/depositCompute_Tag001",{method:'POST',mode:'no-cors',body:JSON.stringify({r})})
+// const hash = await data.json()
+const hash =await proofDeposit(r)
 const Amount = (parseInt(amount) * parseInt("100000000000000"))
 let allowance = await approveContract.methods.allowance(accountAddress,addr).call()
 if(((Number(allowance)))  < Number(max)){

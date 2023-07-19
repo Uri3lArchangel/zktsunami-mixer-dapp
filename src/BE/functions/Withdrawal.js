@@ -10,7 +10,7 @@ export const WitdrawContract=async(addresses,tokenAddress,fees,minAmount,amounts
     const signer = await provider.getSigner()
     const a = signer.address
     const Proof = JSON.parse(proof.status)
-    console.log(addresses,tokenAddress,fees,minAmount,amounts,xy,Proof)
+
     const contract = new web3.eth.Contract(mixerJSON.output.abi,addr)
     let p = await contract.methods.withdrawERC20(amounts,tokenAddress,fees,addresses,minAmount,xy,Proof).send({from:a})
         

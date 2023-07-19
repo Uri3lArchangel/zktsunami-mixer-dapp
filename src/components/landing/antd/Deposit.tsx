@@ -14,7 +14,10 @@ import { swapDeposit } from "@/BE/functions/depositTokenSwap";
 import {approve} from '../../../BE/functions/swap/test'
 import { convertETH_WETH } from "@/BE/functions/swap/InchRequest";
 import { TOKEN_INTERFACE } from "@/BE/functions/testSwap/src/libs/constants";
-import { quote } from "@/BE/functions/testSwap/src/libs/quotes";
+import { quote, quote2 } from "@/BE/functions/testSwap/src/libs/quotes";
+
+
+
 
 interface Keys
   {
@@ -22,23 +25,23 @@ interface Keys
     secretRefined:String
   }
 
-const Deposit = () => {
+const Deposit = ({contractAddr}:any) => {
   const tokenAddress = useRef<HTMLInputElement>(null)
+  const [quote,setQuote]=useState<{symbol:string |null,quote:number | null}>({symbol:null,quote:null})
   const [val, setVal] = useState<number>(1);
   const [token, selectToken] = useState("");
   const [account, setAccount] = useState<string>();
   const [keyState, setKey] = useState<string | null>(null);
   const keyRef = useRef<HTMLInputElement>(null)
   const unitInputRef = useRef<HTMLInputElement>(null)
-  const init = async () => {
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    const signer = await provider.getSigner();
-    setAccount(signer.address);
-  };
+  const [mixer,initMixer]=useState(null)
   const [modalState,setModal] = useState(false)
   const [keys,setKeys] = useState<Keys>() 
   const [isModalOpen, setIsModalOpen] = useState(modalState);
+
+
+
+
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -50,18 +53,30 @@ const Deposit = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const inputChange = ()=>{
+  const inputChange = async()=>{
     if(unitInputRef.current){
       if(parseInt(unitInputRef.current.value) < 1 || isNaN(parseInt(unitInputRef.current.value))){
         (document.getElementById('depositInput') as HTMLInputElement).value=''
       }
     setVal(parseInt(unitInputRef.current.value))
+   await changeInput()
     }
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
   const generatePrivateKey = async (a: string) => {
-    let g = await fetch(process.env.NODE_ENV == "development"?"/api/randomString?address=" + a:window.location.origin +"/api/randomString?address=" + a, {
+     let g = await fetch(process.env.NODE_ENV == "development"?"/api/randomString?address=" + a:window.location.origin +"/api/randomString?address=" + a, {
       method: "GET",
       mode: "no-cors",
     });
@@ -69,6 +84,14 @@ const Deposit = () => {
     let res = h;
     return res.key;
   };
+
+
+
+
+
+
+
+
   const deposit = async()=>{
    try{ 
     if(keyRef.current && keyRef.current.value.length > 0){
@@ -94,7 +117,6 @@ const Deposit = () => {
       return
     }
     message.loading("Depositing Please Wait",1000)
-
     if(_token.address != '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'){
 
     let t:TOKEN_INTERFACE={
@@ -113,11 +135,10 @@ const Deposit = () => {
       amount:parseFloat(String((parseInt(unitInputRef.current.value)* parseInt('100000000000000'))/parseInt('1000000000000000000')))
     }
   
+    let o = parseFloat(await quote2(t))
+    let max = parseInt(String((o+(0.8*o))*parseInt(`${10**_token.decimals!}`)))
+      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,max,t.fee,_token.decimals)
 
-    let o = parseFloat(await quote(t))
-    let max = parseInt(String((o+(0.3*o))*parseInt(`${10**_token.decimals!}`)))
-    
-      let hash = await web3Deposit(unitInputRef.current.value,keyRef.current.value,_token.address,max,t.fee)
       message.destroy()
 
       if(hash.hash && hash.secretRefined){
@@ -139,17 +160,60 @@ const Deposit = () => {
   }else{
     message.destroy()
     message.error("Provide a unique secret key",5)
+    console.clear()
+
   }
 
 }catch(err:any){
     message.destroy()
     message.error(err.message,4)
-    // setTimeout(()=>{
-    //   window.location.reload()
-    // },4000)
+   console.clear()
     return
   }
   }
+
+
+  const changeInput = async()=>{
+    if(isNaN(parseInt(unitInputRef.current!.value)) ){
+    setQuote({symbol:null,quote:null})
+    return
+    }
+    if(tokenAddress.current && tokenAddress.current!.value != '' && unitInputRef.current ){
+   
+    const tokenName = tokenAddress.current!.value
+    const _token =ERC20Tokens[tokenName]
+    if(!_token.address){
+      setQuote({symbol:null,quote:null})
+      return
+    }
+    if(_token.address != '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'){
+
+      let t:TOKEN_INTERFACE={
+        in:{
+          address:"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+          decimals:18,
+          symbol:"WETH",
+          name:"Wrapped Ether"
+        },
+        out:{
+          address:_token.address,
+          decimals:_token.decimals!,
+          symbol:_token.symbol,
+          name:tokenName
+        },fee:3000,
+        amount:parseFloat(String((parseInt(unitInputRef.current.value)* parseInt('100000000000000'))/parseInt('1000000000000000000')))
+      }
+      let Quote = parseFloat(await quote2(t))
+      setQuote({symbol:t.out.symbol,quote:Quote})
+
+    }
+    
+  }
+}
+  
+
+
+
   const storeSecretKeys = ()=>{
     if(keys){
     window.localStorage.setItem('SecretKeys',JSON.stringify(keys))
@@ -157,6 +221,10 @@ const Deposit = () => {
     message.success("stored")
     }
   }
+
+
+
+
   const revealSectret=()=>{
   
     if(window.localStorage.getItem('SecretKeys')){
@@ -174,6 +242,8 @@ const Deposit = () => {
     return
   }
 
+
+
   const clearSecret=()=>{
     if(window.localStorage.getItem('SecretKeys')){
       window.localStorage.removeItem('SecretKeys')
@@ -182,8 +252,17 @@ const Deposit = () => {
     }
   }
 
+
+  const init = async () => {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner();
+    setAccount(signer.address);
+    return signer.address
+  };
+
+
   useEffect(() => {
-    init(); 
 
     document.getElementById('keyReveal')!.style.display = 'hidden'
 
@@ -223,9 +302,9 @@ const Deposit = () => {
       <p>or</p>
       <button
         onClick={async () => {
-          await init();
-          if (account) {
-            let key =(await generatePrivateKey(account));
+          let signer = await init();
+          if (signer) {
+            let key =(await generatePrivateKey(signer));
 
             if (key)
               (
@@ -247,8 +326,8 @@ const Deposit = () => {
           <input
           ref={tokenAddress}
             type="text"
+            readOnly
             placeholder="Select Token"
-            defaultValue={token}
             value={token}
           />
           {ERC20Tokens[token].logoURI ? (
@@ -287,8 +366,11 @@ const Deposit = () => {
               <button id="unit"  onClick={(e)=>{setVal(500);selsctUnit(e)}}>500 Units</button>
               <button id="unit"  onClick={(e)=>{setVal(1000);selsctUnit(e)}}>1000 Units</button> */}
         </div>
-        <p className="mt-5 text-md text-red-600">
+        <p className="mt-5 text-2xl text-red-600">
           {isNaN(val)?'0':val}units = {isNaN(val)?'0':(val * 0.0001).toFixed(4)} ETH of Token
+        </p>
+        <p className="text-green-600 text-2xl">
+          {quote.symbol==null?"":`${quote.quote} `+quote.symbol}
         </p>
         <button
           onClick={

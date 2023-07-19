@@ -97,7 +97,6 @@ for(let i=0;i<amountsInputs.length;i++){
       amount:(parseFloat(amountsInputs[i].value))
     }
     let min = await quote(t)
-    console.log(min)
     minAmounts.push(String(parseInt(min)))
   
     

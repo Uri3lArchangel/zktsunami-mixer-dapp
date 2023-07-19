@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { Button, Tabs } from "antd";
 import type { TabsProps } from "antd";
@@ -20,15 +21,20 @@ const pixel = Pixel({
   variable: "--pixel",
 });
 
-const onChange = (key: string) => {
-  console.log(key);
-};
+
+
+
+const TabApp = ({contractAddr}:any) => {
+
+
+
+
 
 const items: TabsProps["items"] = [
   {
     key: "1",
     label: "Deposit",
-    children: <Deposit />,
+    children: <Deposit contractAddr={contractAddr}/>,
   },
 
   {
@@ -38,7 +44,9 @@ const items: TabsProps["items"] = [
   },
 ];
 
-const TabApp = () => {
+
+
+
   
   const [activekey,setActiveKey]=useState("1")
   const click =(e:React.MouseEvent<HTMLButtonElement>,item:any)=>{
@@ -59,12 +67,22 @@ const TabApp = () => {
     }
    
   }
+
+
+
+  
   useEffect(()=>{
     if(activekey === "1"){
     (document.getElementById("1") as HTMLButtonElement).classList.add("active");
     }
 
   },[activekey])
+
+
+
+
+
+  
   return(
     <div className={utils.tabContainer}>
   <Tabs
@@ -83,7 +101,6 @@ const TabApp = () => {
     className={pixel.className}
     defaultActiveKey={"1"}
     items={items}
-    onChange={onChange}
   />
   
   </div>

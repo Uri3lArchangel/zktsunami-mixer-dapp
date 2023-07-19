@@ -1,5 +1,10 @@
 import bnb from 'cryptocurrency-icons/128/color/bnb.png'
 import inch from 'cryptocurrency-icons/128/color/1inch.png'
+import leo from "cryptocurrency-icons/128/color/leo.png";
+import tusd from "cryptocurrency-icons/128/color/tusd.png";
+import aave from "cryptocurrency-icons/128/color/aave.png";
+import grt from "cryptocurrency-icons/128/color/grt.png";
+import stx from "cryptocurrency-icons/128/color/stx.png";
 
 
 export const tokens=[
@@ -18,13 +23,7 @@ export const tokens=[
     "address": "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
     "logoURI": bnb
   },
-  {
-    "name": "Tether USD",
-    "symbol":"USDT",
-    "logoURI": "https://tokens.1inch.io/0xdac17f958d2ee523a2206206994597c13d831ec7.png",
-    "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-    "decimals": 6
-  },
+ 
  
   {
     "name": "Matic Token",
@@ -149,5 +148,53 @@ export const tokens=[
     "decimals": 18,
     "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
     "logoURI": "https://tokens.1inch.io/0x4a220e6096b25eadb88358cb44068a3248254675.png"
+  },{
+    "name":"Bitfinex LEO Token",
+    "symbol":"LEO",
+    "decimals": 18,
+    "address": "0x2AF5D2aD76741191D15Dfe7bF6aC92d4Bd912Ca3",
+    "logoURI":leo
+  },{
+    "name":"TrueUSD",
+    "symbol":"TUSD",
+    "decimals": 18,
+    "address": "0x0000000000085d4780B73119b644AE5ecd22b376",
+    "logoURI":tusd
+  },{
+    "name":"Cronos Coin",
+    "symbol":"CRO",
+    "decimals": 8,
+    "address": "0xA0b73E1Ff0B80914AB6fe0444E65848C4C34450b",
+    "logoURI":"https://tokens.1inch.io/0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b.png"
+  },{
+    "name":"Aave Token",
+    "symbol":"AAVE",
+    "decimals": 18,
+    "address": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
+    "logoURI":aave
+  },{
+    "name":"Graph Token",
+    "symbol":"GRT",
+    "decimals": 18,
+    "address": "0xc944E90C64B2c07662A292be6244BDf05Cda44a7",
+    "logoURI":grt
+  },{
+    "name":"Stox",
+    "symbol":"STX",
+    "decimals": 18,
+    "address": "0x006BeA43Baa3f7A6f765F14f10A1a1b08334EF45",
+    "logoURI":stx
+  },{
+    "name":"Render Token",
+    "symbol":"RNDR",
+    "decimals": 18,
+    "address": "0x6De037ef9aD2725EB40118Bb1702EBb27e4Aeb24",
+    "logoURI":"https://tokens.1inch.io/0x6de037ef9ad2725eb40118bb1702ebb27e4aeb24.png"
+  },{
+    "name":"Rocket Pool",
+    "symbol":"RPL",
+    "decimals": 18,
+    "address": "0xD33526068D116cE69F19A9ee46F0bd304F21A51f",
+    "logoURI":"https://tokens.1inch.io/0xd33526068d116ce69f19a9ee46f0bd304f21a51f.png"
   }
 ]

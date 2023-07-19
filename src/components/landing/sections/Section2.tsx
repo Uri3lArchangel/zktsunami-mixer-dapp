@@ -17,7 +17,6 @@ import wstep8 from '../../../../public/img33acdae0f/wstep8.jpg'
 import wstep9 from '../../../../public/img33acdae0f/wstep9.jpg'
 
 
-import { btnclick, btnunClick, hyperlink } from '@/FE/functions/interact';
 import landing from '../../../styles/landingpage.module.css'
 
 

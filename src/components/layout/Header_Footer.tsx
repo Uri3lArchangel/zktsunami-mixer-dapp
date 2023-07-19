@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import logo from "../../../public/img33acdae0f/logo.png";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";
@@ -10,7 +10,10 @@ import { chains, myCustomButtonTheme, wagmiConfig } from "@/FE/functions/walletC
 import { CustomAvatar } from "../landing/sections/RainbowkitAvatar";
 
 
+
+
 const Header_Footer = ({ children }: { children: React.ReactNode }) => {
+  
   return (
     <Fragment>
        

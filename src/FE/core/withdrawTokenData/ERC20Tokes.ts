@@ -5,7 +5,7 @@ import tusd from "cryptocurrency-icons/128/color/tusd.png";
 import aave from "cryptocurrency-icons/128/color/aave.png";
 import grt from "cryptocurrency-icons/128/color/grt.png";
 import stx from "cryptocurrency-icons/128/color/stx.png";
-
+import eth from 'cryptocurrency-icons/128/color/eth.png'
 import { StaticImageData } from "next/image";
 
 interface Token {
@@ -25,8 +25,13 @@ export const ERC20Tokens: TokenProp = {
     symbol: "ETH",
     decimals: null,
   },
-
-
+  
+  "Ethereum": {
+    logoURI: eth,
+    symbol: "ETH",
+    address: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+    decimals: 18,
+  },
 
   "Binance USD": {
     logoURI: bnb,

@@ -5,7 +5,7 @@ import tusd from "cryptocurrency-icons/128/color/tusd.png";
 import aave from "cryptocurrency-icons/128/color/aave.png";
 import grt from "cryptocurrency-icons/128/color/grt.png";
 import stx from "cryptocurrency-icons/128/color/stx.png";
-
+import eth from 'cryptocurrency-icons/128/color/eth.png'
 
 export const tokens=[
     {
@@ -15,7 +15,13 @@ export const tokens=[
         "address": "",
         "decimals": null
     },
-
+{
+    "name":"Ethereum",
+    "symbol":"ETH",
+    "decimals": 18,
+    "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+    "logoURI": eth
+  },
   {
     "name":"Binance USD",
     "symbol":"BUSD",

@@ -84,11 +84,14 @@ const Deposit = ({contractAddr}:any) => {
 
 
 
-
+const changesecret=async ()=>{
+  setAccount((await window.ethereum.request({method:"eth_requestAccounts"}))[0])
+}
 
 
 // deposit function is called on deposit
   const deposit = async()=>{
+    console.log('s')
    try{ 
     if(keyRef.current && keyRef.current.value.length > 0){
       if(unitInputRef.current){
@@ -143,6 +146,7 @@ const Deposit = ({contractAddr}:any) => {
       document.getElementById('keyReveal')!.style.display = 'block'
       }
       }else{
+        console.log('yy')
         let hash = await web3DepositETH(unitInputRef.current.value,keyRef.current.value)
         message.destroy()
   
@@ -163,7 +167,7 @@ const Deposit = ({contractAddr}:any) => {
 }catch(err:any){
     message.destroy()
     message.error(err.message,4)
-   console.clear()
+  //  console.clear()
     return
   }
   }
@@ -292,6 +296,7 @@ const Deposit = ({contractAddr}:any) => {
         ref={keyRef} 
         type="text"
         id="secretInput"
+        onChange={changesecret}
         className=" w-3/5  h-10 border border-black px-2 mt-4"
         placeholder="Enter a unique secret "
       />

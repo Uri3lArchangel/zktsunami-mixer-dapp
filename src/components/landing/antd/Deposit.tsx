@@ -91,7 +91,6 @@ const changesecret=async ()=>{
 
 // deposit function is called on deposit
   const deposit = async()=>{
-    console.log('s')
    try{ 
     if(keyRef.current && keyRef.current.value.length > 0){
       if(unitInputRef.current){
@@ -146,7 +145,6 @@ const changesecret=async ()=>{
       document.getElementById('keyReveal')!.style.display = 'block'
       }
       }else{
-        console.log('yy')
         let hash = await web3DepositETH(unitInputRef.current.value,keyRef.current.value)
         message.destroy()
   

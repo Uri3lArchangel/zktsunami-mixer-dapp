@@ -150,7 +150,7 @@ message.error("error"+err.message,4)
 
   return (
     <article>
-        <div style={{textAlign:'center',width:'40%',margin:'1em auto',color:'red',fontSize:'1.3rem'}}>Important: Please ensure that your withdrawal amount matches your initial deposit for each key to successfully complete a one-time withdrawal. If the totals don't match, the withdrawal won't be processed.</div>
+        <div style={{textAlign:'center',width:'40%',margin:'1em auto',color:'red',fontSize:'1.3rem'}}>Important: Please ensure that your withdrawal amount matches your initial deposit for each key to successfully complete a one-time withdrawal. If the totals don&apos;t match, the withdrawal won&apos;t be processed.</div>
       <div className={utils.withdrawTabContainer}>
         <div className={utils.withdrawTitle}>
           <h1>WITHDRAW ANONYMOUSLY TO OTHER ACCOUNTS(S)</h1>

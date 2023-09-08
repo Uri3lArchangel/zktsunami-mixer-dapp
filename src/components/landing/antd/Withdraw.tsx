@@ -150,7 +150,7 @@ message.error("error"+err.message,4)
 
   return (
     <article>
-        <div style={{textAlign:'center',width:'40%',margin:'1em auto',color:'red',fontSize:'1.3rem'}}>Please ensure that your withdrawal total amount matches the deposit amount made per key, as any mismatch will prevent the withdrawal.</div>
+        <div style={{textAlign:'center',width:'40%',margin:'1em auto',color:'red',fontSize:'1.3rem'}}>Important: Please ensure that your withdrawal amount matches your initial deposit for each key to successfully complete a one-time withdrawal. If the totals don't match, the withdrawal won't be processed.</div>
       <div className={utils.withdrawTabContainer}>
         <div className={utils.withdrawTitle}>
           <h1>WITHDRAW ANONYMOUSLY TO OTHER ACCOUNTS(S)</h1>
@@ -192,7 +192,7 @@ message.error("error"+err.message,4)
               />
             )}
           </div>
-          <h4>Enter your access keys</h4>
+          <h4>Enter x,y and secret keys given eariler during deposit</h4>
           <input type="text" ref={xref} className="block w-3/4 mx-auto h-10 my-2 px-2 placeholder:text-gray-200 border border-gray-500" placeholder="x" />
           <input type="text" ref={yref} className="block w-3/4 mx-auto h-10 my-2 px-2 placeholder:text-gray-200 border border-gray-500" placeholder="y" />
           <input type="text" ref={Sref} className="block w-3/4 mx-auto h-10 my-2 px-2 placeholder:text-gray-200 border border-gray-500" placeholder="secret" />

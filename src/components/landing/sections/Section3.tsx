@@ -12,21 +12,20 @@ const Section3 = () => {
 
   return (
     <section id="3"  className="h-screen">
-      <div className="h-full flex justify-between flex-col">
+      <div className="h-full flex justify-between flex-col md:">
           <h4 className="text-3xl text-center ">What can you do?</h4>
           <div className={landing.landing3_tab3Container}>
             <div>
             <h5>Deposit</h5>
             <article>
               <p>
-                Deposit your funds for later withdrawal or transfer to another
-                address all done anonymously.
-              <br />
+              Deposit your funds securely for future use, enabling seamless withdrawals or transfers to other addresses while preserving user privacy. Deposits are made discreetly in small quantities to enhance privacy. After making a deposit, you will receive confidential keys that must be safeguarded, as they are essential for verifying your deposit and successfully withdrawing your funds
+              {/* <br />
                 <em className='text-xl text-red-500'>
                 After Depositing you will receive keys which you must keep secret and safe
                 as they are what you will use to verify your deposit and withdraw your money 
                 successfully
-                </em>
+                </em> */}
 
               </p>
               
@@ -36,12 +35,7 @@ const Section3 = () => {
             <h5>Withdraw</h5>
             <article>
               <p>
-                Deposit your funds for later withdrawal to multiple other addresses all done simultaneously with different choice of tokens 
-              <br />
-                <em className='text-xl text-red-500'>
-                You would need to pass the keys you were given during deposit at withdrawal
-                Ensure the total amount you withdraw at a go (per key) is equal to the total amount deposited of whose key you want to use
-                </em>
+              Securely store your funds for future use, then easily withdraw them to multiple addresses simultaneously using various token options. To ensure a seamless withdrawal process, you'll need to provide the keys you received during your deposit. Make sure that the total amount you withdraw in one go (per key) matches the total amount you deposited under the key you wish to use.
               </p>
             </article>
             </div>

@@ -287,7 +287,7 @@ const changesecret=async ()=>{
     </Modal>
     <article className={utils.depositContainer}>
       <div className={utils.depositTitle}>
-        <h1>DEPOSIT YOUR CRYPTO TO THE MIXER</h1>
+        <h1>DEPOSIT TO THE MIXER POOL</h1>
         <em>note: 1unit = 0.0001ETH</em>
       </div> 
       <input

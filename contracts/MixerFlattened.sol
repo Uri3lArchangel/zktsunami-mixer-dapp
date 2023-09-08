@@ -718,17 +718,24 @@ contract ZkTunami_Mixer is Verifier,ReentrancyGuard,Swap{
    }
 
 
-   function ERC20transfer(uint256 amount,address tokenAddresses,uint24 _fee,address payable account,uint256  minAmounts) internal {
+   function ERC20transfer(uint256 amount,address tokenAddresses,uint24 _fee,address payable account,uint256  minAmounts,uint256 _gas) internal {
+    if(tokenAddresses == (0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE)){
+        (bool status, )= account.call{value:amount,gas:_gas}("");
+        if(!status){
+            revert("failed to transfer base eth ");
+        }
+    
+    }else{
        Swap.swapExactInputSingle(amount,tokenAddresses,_fee,account,minAmounts);
-
+    }
    }
-   function LoopPayment(uint256[] memory amounts,address[] memory tokenAddresses,uint24[] memory _fee,address payable [] memory accounts,uint256[] memory minAmounts,uint256 _feePerAmount) internal {
+   function LoopPayment(uint256[] memory amounts,address[] memory tokenAddresses,uint24[] memory _fee,address payable [] memory accounts,uint256[] memory minAmounts,uint256 _feePerAmount,uint256 _gas) internal {
   for (uint256 i=0; i<amounts.length; i++)
       {
-        ERC20transfer(((amounts[i]).sub(_feePerAmount)), tokenAddresses[i], _fee[i],accounts[i], minAmounts[i]);
+        ERC20transfer(((amounts[i]).sub(_feePerAmount)), tokenAddresses[i], _fee[i],accounts[i], minAmounts[i],_gas);
       }
    }
-   function withdrawERC20(uint256[] memory amounts,address[] memory tokenAddresses,uint24[] memory _fee,address payable [] memory accounts,uint256[] memory minAmounts,uint256[2] memory xy,Proof calldata proof) public payable nonReentrant() returns (uint8){
+   function withdrawERC20(uint256[] memory amounts,address[] memory tokenAddresses,uint24[] memory _fee,address payable [] memory accounts,uint256[] memory minAmounts,uint256 _gas,uint256[2] memory xy,Proof calldata proof) public payable nonReentrant() returns (uint8){
       require(tracking1[xy[0]] == 0 || tracking2[xy[1]] == 0,"already withdrawn");
       require(Verifier.verifyTx(proof, xy),"not verified");
       require(accounts.length == amounts.length,"account and amount must match");
@@ -743,7 +750,7 @@ contract ZkTunami_Mixer is Verifier,ReentrancyGuard,Swap{
       uint256 adminFee=(fee.mul(80)).div(100);
       uint256 feePerAmount = fee.div(amounts.length);
 
-        LoopPayment(amounts, tokenAddresses, _fee, accounts, minAmounts, feePerAmount);
+        LoopPayment(amounts, tokenAddresses, _fee, accounts, minAmounts, feePerAmount,_gas);
 
       _baseWeth.transfer(Admin, adminFee);
       tracking1[xy[0]] = 1;
